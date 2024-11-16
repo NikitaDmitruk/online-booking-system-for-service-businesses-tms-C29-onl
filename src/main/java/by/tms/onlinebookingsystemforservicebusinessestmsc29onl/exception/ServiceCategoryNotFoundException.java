@@ -1,6 +1,6 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class ServiceCategoryNotFoundException extends Throwable {
+public class ServiceCategoryNotFoundException extends RuntimeException {
     public ServiceCategoryNotFoundException() {
         super();
     }

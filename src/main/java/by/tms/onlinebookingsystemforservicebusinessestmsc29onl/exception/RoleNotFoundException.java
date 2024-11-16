@@ -1,6 +1,6 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class RoleNotFoundException extends Throwable {
+public class RoleNotFoundException extends RuntimeException {
     public RoleNotFoundException() {
         super();
     }

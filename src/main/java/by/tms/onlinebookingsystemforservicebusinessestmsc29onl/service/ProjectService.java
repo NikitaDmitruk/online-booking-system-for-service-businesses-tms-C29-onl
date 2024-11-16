@@ -21,9 +21,9 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project updateProject(Project project) throws ProjectNotFoundException {
-        Project projectToUpdate = projectRepository.findById(project.getId()).
-                orElseThrow(() -> new ProjectNotFoundException("Project not found"));
+    public Project updateProject(Project project) {
+        Project projectToUpdate = projectRepository.findById(project.getId())
+                .orElseThrow(() -> new ProjectNotFoundException("Проект не найден."));
         projectToUpdate.setName(project.getName());
         projectToUpdate.setDescription(project.getDescription());
         projectToUpdate.setOwner(project.getOwner());
@@ -33,9 +33,9 @@ public class ProjectService {
         return projectRepository.save(projectToUpdate);
     }
 
-    public Project getProjectById(Long id) throws ProjectNotFoundException {
-        return projectRepository.findById(id).
-                orElseThrow(() -> new ProjectNotFoundException("Project not found"));
+    public Project getProjectById(Long id) {
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException("Проект не найден."));
     }
 
     public void deleteProjectById(Long id) {

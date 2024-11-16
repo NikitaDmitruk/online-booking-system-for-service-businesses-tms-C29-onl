@@ -20,17 +20,17 @@ public class RoleService {
         return roleRepository.save(role);
     }
 
-    public Role updateRole(Role role) throws RoleNotFoundException {
-        Role roleToUpdate = roleRepository.findById(role.getId()).
-                orElseThrow(() -> new RoleNotFoundException("Role Not Found!"));
+    public Role updateRole(Role role) {
+        Role roleToUpdate = roleRepository.findById(role.getId())
+                .orElseThrow(() -> new RoleNotFoundException("Роль не найдена."));
         roleToUpdate.setName(role.getName());
         roleToUpdate.setUsers(role.getUsers());
         return roleRepository.save(roleToUpdate);
     }
 
-    public Role findRoleById(Long id) throws RoleNotFoundException {
-        return roleRepository.findById(id).
-                orElseThrow(() -> new RoleNotFoundException("Role Not Found!"));
+    public Role findRoleById(Long id) {
+        return roleRepository.findById(id)
+                .orElseThrow(() -> new RoleNotFoundException("Роль не найдена."));
     }
 
     public void deleteRole(Long id) {

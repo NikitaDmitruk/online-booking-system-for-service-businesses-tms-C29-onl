@@ -1,6 +1,6 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class CustomerServiceNotFoundException extends Throwable {
+public class CustomerServiceNotFoundException extends RuntimeException {
     public CustomerServiceNotFoundException() {
         super();
     }

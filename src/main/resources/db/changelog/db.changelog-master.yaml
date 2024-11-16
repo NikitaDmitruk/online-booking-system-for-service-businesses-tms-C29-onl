@@ -150,7 +150,7 @@ databaseChangeLog:
                   name: email
                   type: VARCHAR(255)
               - column:
-                  name: name
+                  name: username
                   type: VARCHAR(255)
               - column:
                   name: password
@@ -311,3 +311,17 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: tb_user
             validate: true
+  - changeSet:
+      id: 1731495345727-1
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: duration
+                  type: INT
+              - column:
+                  name: notes
+                  type: VARCHAR(255)
+            tableName: tb_appointment

@@ -1,6 +1,6 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class AppointmentNotFoundException extends Throwable {
+public class AppointmentNotFoundException extends RuntimeException {
     public AppointmentNotFoundException() {
         super();
     }

@@ -36,7 +36,7 @@ public class Project {
 
     private boolean isCompany;
 
-    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "provider", orphanRemoval = true)
     private List<CustomerService> customerServices;
 
 

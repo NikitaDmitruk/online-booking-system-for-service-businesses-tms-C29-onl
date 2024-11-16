@@ -19,9 +19,14 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String notes;
+    private Integer duration;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime appointmentTime;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -30,8 +35,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "customer_service_id")
     private CustomerService customerService;
-
-    private LocalDateTime appointmentTime;
 
     public enum AppointmentStatus {
         CONFIRMED, PENDING, APPROVED, REJECTED;

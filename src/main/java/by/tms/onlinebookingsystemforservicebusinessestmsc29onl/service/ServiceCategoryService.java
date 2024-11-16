@@ -20,16 +20,16 @@ public class ServiceCategoryService {
         return serviceCategoryRepository.save(serviceCategory);
     }
 
-    public ServiceCategory updateServiceCategory(ServiceCategory serviceCategory) throws ServiceCategoryNotFoundException {
-        ServiceCategory serviceCategoryToUpdate = serviceCategoryRepository.findById(serviceCategory.getId()).
-                orElseThrow(() -> new ServiceCategoryNotFoundException("Service Category Not Found!"));
+    public ServiceCategory updateServiceCategory(ServiceCategory serviceCategory) {
+        ServiceCategory serviceCategoryToUpdate = serviceCategoryRepository.findById(serviceCategory.getId())
+                .orElseThrow(() -> new ServiceCategoryNotFoundException("Категория услуги не найдена."));
         serviceCategoryToUpdate.setName(serviceCategory.getName());
         return serviceCategoryRepository.save(serviceCategoryToUpdate);
     }
 
-    public ServiceCategory getServiceCategoryById(Long id) throws ServiceCategoryNotFoundException {
-        return serviceCategoryRepository.findById(id).
-                orElseThrow(() -> new ServiceCategoryNotFoundException("Service Category Not Found!"));
+    public ServiceCategory getServiceCategoryById(Long id) {
+        return serviceCategoryRepository.findById(id)
+                .orElseThrow(() -> new ServiceCategoryNotFoundException("Категория услуги не найдена."));
     }
 
     public void deleteServiceCategoryById(Long id) {

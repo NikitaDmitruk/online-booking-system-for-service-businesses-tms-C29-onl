@@ -20,9 +20,9 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException {
-        Appointment appointmentToUpdate = appointmentRepository.findById(appointment.getId()).
-                orElseThrow(() -> new AppointmentNotFoundException("Appointment Not Found!"));
+    public Appointment updateAppointment(Appointment appointment) {
+        Appointment appointmentToUpdate = appointmentRepository.findById(appointment.getId())
+                .orElseThrow(() -> new AppointmentNotFoundException("Запись на услугу не найдена."));
         appointmentToUpdate.setClient(appointment.getClient());
         appointmentToUpdate.setCustomerService(appointment.getCustomerService());
         appointmentToUpdate.setAppointmentTime(appointment.getAppointmentTime());
@@ -30,9 +30,9 @@ public class AppointmentService {
         return appointmentRepository.save(appointmentToUpdate);
     }
 
-    public Appointment getAppointmentById(Long id) throws AppointmentNotFoundException {
-        return appointmentRepository.findById(id).
-                orElseThrow(() -> new AppointmentNotFoundException("Appointment Not Found!"));
+    public Appointment getAppointmentById(Long id) {
+        return appointmentRepository.findById(id)
+                .orElseThrow(() -> new AppointmentNotFoundException("Запись на услугу не найдена."));
     }
 
     public void deleteAppointmentById(Long id) {

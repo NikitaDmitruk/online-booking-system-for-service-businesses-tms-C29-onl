@@ -1,6 +1,6 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class ProjectNotFoundException extends Throwable {
+public class ProjectNotFoundException extends RuntimeException {
     public ProjectNotFoundException() {
         super();
     }

@@ -20,9 +20,9 @@ public class CustomerServiceService {
         return customerServiceRepository.save(customerService);
     }
 
-    public CustomerService updateService(CustomerService customerService) throws CustomerServiceNotFoundException {
-        CustomerService customerServiceToUpdate = customerServiceRepository.findById(customerService.getId()).
-                orElseThrow(() -> new CustomerServiceNotFoundException("Customer Service Not Found!"));
+    public CustomerService updateService(CustomerService customerService) {
+        CustomerService customerServiceToUpdate = customerServiceRepository.findById(customerService.getId())
+                .orElseThrow(() -> new CustomerServiceNotFoundException("Сервис для клиента не найден."));
         customerServiceToUpdate.setName(customerService.getName());
         customerServiceToUpdate.setCategory(customerService.getCategory());
         customerServiceToUpdate.setProvider(customerService.getProvider());
@@ -30,9 +30,9 @@ public class CustomerServiceService {
         return customerServiceRepository.save(customerServiceToUpdate);
     }
 
-    public CustomerService getCustomerServiceById(Long id) throws CustomerServiceNotFoundException {
-        return customerServiceRepository.findById(id).
-                orElseThrow(() -> new CustomerServiceNotFoundException("Customer Service Not Found!"));
+    public CustomerService getCustomerServiceById(Long id) {
+        return customerServiceRepository.findById(id)
+                .orElseThrow(() -> new CustomerServiceNotFoundException("Сервис для клиента не найден."));
     }
 
     public void deleteCustomerServiceById(Long id) {
