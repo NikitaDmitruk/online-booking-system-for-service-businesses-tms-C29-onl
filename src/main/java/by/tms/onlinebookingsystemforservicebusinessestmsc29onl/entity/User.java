@@ -1,11 +1,13 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity;
 
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.audit.AuditMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,12 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_user")
-public class User implements UserDetails {
+public class User extends AuditMetadata implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,20 +1,23 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity;
 
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.audit.AuditMetadata;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_customer_service")
-public class CustomerService {
+public class CustomerService extends AuditMetadata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

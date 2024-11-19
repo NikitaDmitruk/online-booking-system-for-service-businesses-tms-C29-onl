@@ -1,20 +1,23 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity;
 
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.audit.AuditMetadata;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_appointment")
-public class Appointment {
+public class Appointment extends AuditMetadata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +40,7 @@ public class Appointment {
     private CustomerService customerService;
 
     public enum AppointmentStatus {
-        CONFIRMED, PENDING, APPROVED, REJECTED;
+        CONFIRMED, PENDING, REJECTED;
     }
 
 }
