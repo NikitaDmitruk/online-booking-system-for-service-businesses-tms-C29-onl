@@ -1,7 +1,10 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.controller;
 
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.dto.UserRegisterDto;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.User;
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.mapper.UserMapper;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -36,7 +40,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserRegisterDto userRegisterDto) {
+        User user = userMapper.userRegisterDtoToUser(userRegisterDto);
         User createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }

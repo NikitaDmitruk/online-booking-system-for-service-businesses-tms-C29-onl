@@ -2,12 +2,18 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.controller;
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.dto.UserLoginDto;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.security.JwtUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.MethodParameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Method;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,7 +24,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<?> login(@Valid @RequestBody UserLoginDto userLoginDto) {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userLoginDto.getUsername(), userLoginDto.getPassword()));
             String token = jwtUtil.createToken(userLoginDto.getUsername());

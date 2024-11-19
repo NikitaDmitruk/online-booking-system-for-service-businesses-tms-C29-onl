@@ -17,10 +17,10 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "tb_user")
 public class User extends AuditMetadata implements UserDetails {
     @Id
