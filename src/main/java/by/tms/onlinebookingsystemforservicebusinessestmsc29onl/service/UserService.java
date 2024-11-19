@@ -1,10 +1,9 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service;
 
-import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.Role;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.User;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception.UserNotFoundException;
-import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.repository.RoleRepository;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,17 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.roleService = roleService;
-    }
 
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -36,7 +30,7 @@ public class UserService implements UserDetailsService {
 
     public User updateUser(User user) {
         User userToUpdate = userRepository.findById(user.getId()).
-                orElseThrow(() -> new UserNotFoundException("Пользователь не найден."));
+                orElseThrow(UserNotFoundException::new);
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPhone(user.getPhone());
@@ -49,16 +43,16 @@ public class UserService implements UserDetailsService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).
-                orElseThrow(() -> new UserNotFoundException("Пользователь не найден."));
+                orElseThrow(UserNotFoundException::new);
     }
 
     public void deleteUserById(Long id) {
-        userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Пользователь не найден."));
+        userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         userRepository.deleteById(id);
     }
 
     public void deleteUser(User user) {
-        userRepository.findById(user.getId()).orElseThrow(() -> new UserNotFoundException("Пользователь не найден."));
+        userRepository.findById(user.getId()).orElseThrow((UserNotFoundException::new));
         userRepository.delete(user);
     }
 
@@ -67,7 +61,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }

@@ -1,19 +1,11 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class AppointmentNotFoundException extends RuntimeException {
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
+
+public class AppointmentNotFoundException extends AbstractThrowableProblem {
+
     public AppointmentNotFoundException() {
-        super();
-    }
-
-    public AppointmentNotFoundException(String message) {
-        super(message);
-    }
-
-    public AppointmentNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public AppointmentNotFoundException(Throwable cause) {
-        super(cause);
+        super(null, "Not found", Status.NOT_FOUND, "Appointment not found");
     }
 }

@@ -3,19 +3,16 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.Project;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception.ProjectNotFoundException;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.repository.ProjectRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-
-
-    public ProjectService(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
 
     public Project create(Project project) {
         return projectRepository.save(project);
@@ -23,7 +20,7 @@ public class ProjectService {
 
     public Project updateProject(Project project) {
         Project projectToUpdate = projectRepository.findById(project.getId())
-                .orElseThrow(() -> new ProjectNotFoundException("Проект не найден."));
+                .orElseThrow(ProjectNotFoundException::new);
         projectToUpdate.setName(project.getName());
         projectToUpdate.setDescription(project.getDescription());
         projectToUpdate.setOwner(project.getOwner());
@@ -35,14 +32,16 @@ public class ProjectService {
 
     public Project getProjectById(Long id) {
         return projectRepository.findById(id)
-                .orElseThrow(() -> new ProjectNotFoundException("Проект не найден."));
+                .orElseThrow(ProjectNotFoundException::new);
     }
 
     public void deleteProjectById(Long id) {
+        projectRepository.findById(id).orElseThrow(ProjectNotFoundException::new);
         projectRepository.deleteById(id);
     }
 
     public void deleteProject(Project project) {
+        projectRepository.findById(project.getId()).orElseThrow(ProjectNotFoundException::new);
         projectRepository.delete(project);
     }
 

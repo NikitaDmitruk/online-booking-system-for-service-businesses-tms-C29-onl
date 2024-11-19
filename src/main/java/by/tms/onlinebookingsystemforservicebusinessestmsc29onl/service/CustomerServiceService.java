@@ -3,18 +3,16 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.CustomerService;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception.CustomerServiceNotFoundException;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.repository.CustomerServiceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceService {
 
     private final CustomerServiceRepository customerServiceRepository;
-
-    public CustomerServiceService(CustomerServiceRepository customerServiceRepository) {
-        this.customerServiceRepository = customerServiceRepository;
-    }
 
     public CustomerService createService(CustomerService customerService) {
         return customerServiceRepository.save(customerService);
@@ -22,7 +20,7 @@ public class CustomerServiceService {
 
     public CustomerService updateService(CustomerService customerService) {
         CustomerService customerServiceToUpdate = customerServiceRepository.findById(customerService.getId())
-                .orElseThrow(() -> new CustomerServiceNotFoundException("Сервис для клиента не найден."));
+                .orElseThrow(CustomerServiceNotFoundException::new);
         customerServiceToUpdate.setName(customerService.getName());
         customerServiceToUpdate.setCategory(customerService.getCategory());
         customerServiceToUpdate.setProvider(customerService.getProvider());
@@ -32,14 +30,16 @@ public class CustomerServiceService {
 
     public CustomerService getCustomerServiceById(Long id) {
         return customerServiceRepository.findById(id)
-                .orElseThrow(() -> new CustomerServiceNotFoundException("Сервис для клиента не найден."));
+                .orElseThrow(CustomerServiceNotFoundException::new);
     }
 
     public void deleteCustomerServiceById(Long id) {
+        customerServiceRepository.findById(id).orElseThrow(CustomerServiceNotFoundException::new);
         customerServiceRepository.deleteById(id);
     }
 
     public void deleteCustomerService(CustomerService customerService) {
+        customerServiceRepository.findById(customerService.getId()).orElseThrow(CustomerServiceNotFoundException::new);
         customerServiceRepository.delete(customerService);
     }
 

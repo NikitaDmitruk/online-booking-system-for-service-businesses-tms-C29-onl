@@ -1,19 +1,11 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class CustomerServiceNotFoundException extends RuntimeException {
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
+
+public class CustomerServiceNotFoundException extends AbstractThrowableProblem {
+
     public CustomerServiceNotFoundException() {
-        super();
-    }
-
-    public CustomerServiceNotFoundException(String message) {
-        super(message);
-    }
-
-    public CustomerServiceNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public CustomerServiceNotFoundException(Throwable cause) {
-        super(cause);
+        super(null, "Not found", Status.NOT_FOUND, "Customer not found");
     }
 }

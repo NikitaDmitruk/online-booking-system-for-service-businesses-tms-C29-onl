@@ -1,19 +1,10 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
+
+public class UserNotFoundException extends AbstractThrowableProblem {
     public UserNotFoundException() {
-        super();
-    }
-
-    public UserNotFoundException(String message) {
-        super(message);
-    }
-
-    public UserNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public UserNotFoundException(Throwable cause) {
-        super(cause);
+        super(null, "Not found", Status.NOT_FOUND, "User not found");
     }
 }

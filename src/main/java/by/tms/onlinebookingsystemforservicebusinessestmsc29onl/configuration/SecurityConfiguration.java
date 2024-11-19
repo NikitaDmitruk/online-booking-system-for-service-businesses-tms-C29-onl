@@ -2,6 +2,7 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.configuration;
 
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.filter.JwtRequestFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,14 +22,11 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private final SecurityProblemSupport problemSupport;
+    @Autowired
+    private SecurityProblemSupport problemSupport;
 
-    private final JwtRequestFilter jwtRequestFilter;
-
-    public SecurityConfiguration(JwtRequestFilter jwtRequestFilter, SecurityProblemSupport problemSupport) {
-        this.jwtRequestFilter = jwtRequestFilter;
-        this.problemSupport = problemSupport;
-    }
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -36,7 +34,12 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable) // Отключаем CSRF для REST API
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Без состояния
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers(HttpMethod.POST, "/api/users/**", "/api/auth/**").permitAll().requestMatchers("/api/**").authenticated().anyRequest().permitAll()); // Требовать авторизацию для всех других запросов
+                        .requestMatchers(HttpMethod.POST, "/api/users/**", "/api/auth/**").permitAll().requestMatchers("/api/**").authenticated().anyRequest().permitAll()) // Требовать авторизацию для всех других запросов
+                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(problemSupport)
+                        .accessDeniedHandler(problemSupport))
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable);
 
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Добавляем фильтр JWT

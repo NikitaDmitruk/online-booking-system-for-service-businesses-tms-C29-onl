@@ -1,19 +1,11 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class RoleNotFoundException extends RuntimeException {
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
+
+public class RoleNotFoundException extends AbstractThrowableProblem {
+
     public RoleNotFoundException() {
-        super();
-    }
-
-    public RoleNotFoundException(String message) {
-        super(message);
-    }
-
-    public RoleNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public RoleNotFoundException(Throwable cause) {
-        super(cause);
+        super(null, "Not found", Status.NOT_FOUND, "Role not found");
     }
 }

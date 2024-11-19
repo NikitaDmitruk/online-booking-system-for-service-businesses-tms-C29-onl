@@ -1,19 +1,11 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception;
 
-public class ServiceCategoryNotFoundException extends RuntimeException {
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
+
+public class ServiceCategoryNotFoundException extends AbstractThrowableProblem {
+
     public ServiceCategoryNotFoundException() {
-        super();
-    }
-
-    public ServiceCategoryNotFoundException(String message) {
-        super(message);
-    }
-
-    public ServiceCategoryNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ServiceCategoryNotFoundException(Throwable cause) {
-        super(cause);
+        super(null, "Not found", Status.NOT_FOUND, "Service category not found");
     }
 }

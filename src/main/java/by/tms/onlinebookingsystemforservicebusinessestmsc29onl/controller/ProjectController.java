@@ -1,21 +1,21 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.controller;
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.Project;
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.User;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/projects")
+@RequiredArgsConstructor
 public class ProjectController {
 
     private final ProjectService projectService;
-
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProject(@PathVariable Long id) {
@@ -30,21 +30,27 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Project> createProject(@RequestBody Project project) {
-        Project projectToCreate = projectService.create(project);
-        return ResponseEntity.ok(projectToCreate);
+    public ResponseEntity<Project> createProject(@RequestBody Project project, @AuthenticationPrincipal User user) {
+        project.setOwner(user);
+        Project createdProject = projectService.create(project);
+        return ResponseEntity.ok(createdProject);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
         project.setId(id);
-        projectService.updateProject(project);
-        return ResponseEntity.ok(project);
+        Project updatedProject = projectService.updateProject(project);
+        return ResponseEntity.ok(updatedProject);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) {
         projectService.deleteProjectById(id);
         return ResponseEntity.noContent().build();
     }
+
+//    @PostMapping("/{id}/members")
+//    public Project addMemberToProject(@PathVariable Long id, @RequestBody User user) {
+//        // Добавляет участника к проекту
+//    }
 }
