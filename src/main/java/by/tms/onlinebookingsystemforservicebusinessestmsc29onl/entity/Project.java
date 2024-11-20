@@ -1,6 +1,7 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity;
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.audit.AuditMetadata;
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.embedded.ProjectAddress;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,9 +23,22 @@ public class Project extends AuditMetadata {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
+    @ElementCollection
+    private List<String> interiorPhotos;
+    @ElementCollection
+    private List<String> examplesOfWorks;
+    @ElementCollection
+    private List<String> messages;
+
+
+    @Embedded
+    private ProjectAddress projectAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
+    private SubCategory subCategory;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -41,6 +55,9 @@ public class Project extends AuditMetadata {
 
     @OneToMany(mappedBy = "provider", orphanRemoval = true)
     private List<CustomerService> customerServices;
+
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules;
 
 
 }

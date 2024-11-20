@@ -2,7 +2,6 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.controller;
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.ServiceCategory;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service.ServiceCategoryService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

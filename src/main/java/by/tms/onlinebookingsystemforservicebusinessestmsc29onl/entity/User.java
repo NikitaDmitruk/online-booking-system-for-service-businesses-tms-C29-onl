@@ -3,10 +3,7 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.audit.AuditMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,11 +24,16 @@ public class User extends AuditMetadata implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Column(unique = true, nullable = false)
     private String username;
     private String email;
+    @Column(unique = true, nullable = false)
     private String phone;
+    @Column(nullable = false)
     private String password;
+    private String avatar;
+    @ElementCollection
+    private List<String> messages;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

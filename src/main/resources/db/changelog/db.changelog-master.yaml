@@ -414,128 +414,388 @@ databaseChangeLog:
             columnNames: role_id, user_id
             constraintName: pk_tb_user_roles
             tableName: tb_user_roles
-#  - changeSet:
-#      id: 1732019065169-1
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - addColumn:
-#            columns:
-#              - column:
-#                  name: created_at
-#                  type: DATETIME
-#              - column:
-#                  name: updated_at
-#                  type: DATETIME
-#            tableName: tb_appointment
-#  - changeSet:
-#      id: 1732019065169-2
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - addColumn:
-#            columns:
-#              - column:
-#                  name: created_at
-#                  type: DATETIME
-#              - column:
-#                  name: updated_at
-#                  type: DATETIME
-#            tableName: tb_customer_service
-#  - changeSet:
-#      id: 1732019065169-3
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - addColumn:
-#            columns:
-#              - column:
-#                  name: created_at
-#                  type: DATETIME
-#              - column:
-#                  name: updated_at
-#                  type: DATETIME
-#            tableName: tb_project
-#  - changeSet:
-#      id: 1732019065169-4
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - addColumn:
-#            columns:
-#              - column:
-#                  name: created_at
-#                  type: DATETIME
-#              - column:
-#                  name: updated_at
-#                  type: DATETIME
-#            tableName: tb_user
-#  - changeSet:
-#      id: 1732019065169-9
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - dropColumn:
-#            columnName: created_by
-#            tableName: tb_appointment
-#        - dropColumn:
-#            columnName: created_date
-#            tableName: tb_appointment
-#        - dropColumn:
-#            columnName: modified_by
-#            tableName: tb_appointment
-#        - dropColumn:
-#            columnName: modified_date
-#            tableName: tb_appointment
-#  - changeSet:
-#      id: 1732019065169-10
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - dropColumn:
-#            columnName: created_by
-#            tableName: tb_customer_service
-#        - dropColumn:
-#            columnName: created_date
-#            tableName: tb_customer_service
-#        - dropColumn:
-#            columnName: modified_by
-#            tableName: tb_customer_service
-#        - dropColumn:
-#            columnName: modified_date
-#            tableName: tb_customer_service
-#  - changeSet:
-#      id: 1732019065169-11
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - dropColumn:
-#            columnName: created_by
-#            tableName: tb_project
-#        - dropColumn:
-#            columnName: created_date
-#            tableName: tb_project
-#        - dropColumn:
-#            columnName: modified_by
-#            tableName: tb_project
-#        - dropColumn:
-#            columnName: modified_date
-#            tableName: tb_project
-#  - changeSet:
-#      id: 1732019065169-12
-#      author: Nikita
-#      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-#      changes:
-#        - dropColumn:
-#            columnName: created_by
-#            tableName: tb_user
-#        - dropColumn:
-#            columnName: created_date
-#            tableName: tb_user
-#        - dropColumn:
-#            columnName: modified_by
-#            tableName: tb_user
-#        - dropColumn:
-#            columnName: modified_date
-#            tableName: tb_user
+  - changeSet:
+      id: 1732036281745-5
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uc_tb_user_email
+            tableName: tb_user
+  - changeSet:
+      id: 1732036281745-6
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: phone
+            constraintName: uc_tb_user_phone
+            tableName: tb_user
+  - changeSet:
+      id: 1732036281745-7
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: username
+            constraintName: uc_tb_user_username
+            tableName: tb_user
+  - changeSet:
+      id: 1732036281745-1
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: VARCHAR(255)
+            columnName: email
+            tableName: tb_user
+            validate: true
+  - changeSet:
+      id: 1732036281745-2
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: VARCHAR(255)
+            columnName: password
+            tableName: tb_user
+            validate: true
+  - changeSet:
+      id: 1732036281745-3
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: VARCHAR(255)
+            columnName: phone
+            tableName: tb_user
+            validate: true
+  - changeSet:
+      id: 1732036281745-4
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: VARCHAR(255)
+            columnName: username
+            tableName: tb_user
+            validate: true
+  - changeSet:
+      id: 1732115238352-2
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: customer_service_id
+                  type: BIGINT
+              - column:
+                  name: examples_of_works
+                  type: VARCHAR(255)
+            tableName: customer_service_examples_of_works
+  - changeSet:
+      id: 1732115238352-3
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: examples_of_works
+                  type: VARCHAR(255)
+            tableName: project_examples_of_works
+  - changeSet:
+      id: 1732115238352-4
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: interior_photos
+                  type: VARCHAR(255)
+            tableName: project_interior_photos
+  - changeSet:
+      id: 1732115238352-5
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: messages
+                  type: VARCHAR(255)
+            tableName: project_messages
+  - changeSet:
+      id: 1732115238352-6
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_schedule
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: provider_id
+                  type: BIGINT
+              - column:
+                  name: date
+                  type: DATE
+            tableName: schedule
+  - changeSet:
+      id: 1732115238352-7
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: schedule_id
+                  type: BIGINT
+              - column:
+                  name: available_slots
+                  type: TIME
+            tableName: schedule_available_slots
+  - changeSet:
+      id: 1732115238352-8
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: schedule_id
+                  type: BIGINT
+              - column:
+                  name: unavailable_slots
+                  type: TIME
+            tableName: schedule_unavailable_slots
+  - changeSet:
+      id: 1732115238352-9
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tb_category
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: tb_category
+  - changeSet:
+      id: 1732115238352-10
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tb_sub_category
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: category_id
+                  type: BIGINT
+            tableName: tb_sub_category
+  - changeSet:
+      id: 1732115238352-11
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: messages
+                  type: VARCHAR(255)
+            tableName: user_messages
+  - changeSet:
+      id: 1732115238352-12
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: avatar
+                  type: VARCHAR(255)
+            tableName: tb_user
+  - changeSet:
+      id: 1732115238352-13
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: brake_after_service
+                  type: INT
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: duration
+                  type: VARCHAR(255)
+              - column:
+                  name: price
+                  type: DECIMAL
+            tableName: tb_customer_service
+  - changeSet:
+      id: 1732115238352-14
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+              - column:
+                  name: country
+                  type: VARCHAR(255)
+              - column:
+                  name: house_number
+                  type: VARCHAR(255)
+              - column:
+                  name: postal_code
+                  type: VARCHAR(255)
+              - column:
+                  name: street_address
+                  type: VARCHAR(255)
+              - column:
+                  name: sub_category_id
+                  type: BIGINT
+            tableName: tb_project
+  - changeSet:
+      id: 1732115238352-15
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: client_came
+                  type: BOOLEAN
+              - column:
+                  name: schedule_id
+                  type: BIGINT
+            tableName: tb_appointment
+  - changeSet:
+      id: 1732115238352-25
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: provider_id
+            baseTableName: schedule
+            constraintName: FK_SCHEDULE_ON_PROVIDER
+            referencedColumnNames: id
+            referencedTableName: tb_project
+  - changeSet:
+      id: 1732115238352-26
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: tb_appointment
+            constraintName: FK_TB_APPOINTMENT_ON_SCHEDULE
+            referencedColumnNames: id
+            referencedTableName: schedule
+  - changeSet:
+      id: 1732115238352-27
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: sub_category_id
+            baseTableName: tb_project
+            constraintName: FK_TB_PROJECT_ON_SUB_CATEGORY
+            referencedColumnNames: id
+            referencedTableName: tb_sub_category
+  - changeSet:
+      id: 1732115238352-28
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: tb_sub_category
+            constraintName: FK_TB_SUB_CATEGORY_ON_CATEGORY
+            referencedColumnNames: id
+            referencedTableName: tb_category
+  - changeSet:
+      id: 1732115238352-29
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_service_id
+            baseTableName: customer_service_examples_of_works
+            constraintName: fk_customerservice_examplesofworks_on_customer_service
+            referencedColumnNames: id
+            referencedTableName: tb_customer_service
+  - changeSet:
+      id: 1732115238352-30
+      author: Nikita
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: project_examples_of_works
+            constraintName: fk_project_examplesofworks_on_project
+            referencedColumnNames: id
+            referencedTableName: tb_project
+
+
+
 

@@ -1,6 +1,8 @@
 package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.controller;
 
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.dto.ScheduleDto;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.Project;
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.Schedule;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.User;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +50,17 @@ public class ProjectController {
         projectService.deleteProjectById(id);
         return ResponseEntity.noContent().build();
     }
+
+//    @PostMapping("/projects/{id}/schedules")
+//    public ResponseEntity<Schedule> createSchedule(@PathVariable Long id,
+//                                                   @RequestBody ScheduleDto scheduleDto,
+//                                                   @AuthenticationPrincipal User user) {
+//        Project project = projectService.getProjectById(id);
+//        if (project.getOwner().equals(user)) {
+//
+//        }
+//
+//    }
 
 //    @PostMapping("/{id}/members")
 //    public Project addMemberToProject(@PathVariable Long id, @RequestBody User user) {

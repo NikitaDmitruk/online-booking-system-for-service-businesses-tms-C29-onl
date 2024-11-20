@@ -13,10 +13,10 @@ import lombok.*;
 public class UserRegisterDto {
 
     @Size(min = 4, max = 20)
-    @NotBlank
+    @NotBlank(message = "Имя пользователя не может быть пустым или состоять только из пробелов")
     private String username;
     @Size(min = 4, max = 20)
-    @NotBlank
+    @NotBlank(message = "Пароль не может быть пустым или состоять только из пробелов")
     private String password;
 
     @Email(message = "Некорректный формат email")
