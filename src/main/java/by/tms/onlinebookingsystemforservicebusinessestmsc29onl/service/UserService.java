@@ -2,6 +2,7 @@ package by.tms.onlinebookingsystemforservicebusinessestmsc29onl.service;
 
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.entity.User;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception.UserNotFoundException;
+import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.exception.UsernameAlreadyExistsException;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,9 @@ public class UserService implements UserDetailsService {
     private final RoleService roleService;
 
     public User createUser(User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new UsernameAlreadyExistsException();
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>());
         user.getRoles().add(roleService.findRoleById(1L));

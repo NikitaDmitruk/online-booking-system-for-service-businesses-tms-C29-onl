@@ -4,16 +4,12 @@ import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.dto.UserLoginDto;
 import by.tms.onlinebookingsystemforservicebusinessestmsc29onl.security.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Method;
 
 @RequiredArgsConstructor
 @RestController

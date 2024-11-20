@@ -10,13 +10,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping
+@RequestMapping("/api/roles")
 public class RoleController {
 
     private final RoleService roleService;
 
     @GetMapping
-    public ResponseEntity<List<Role>> getRoles() {
+    public ResponseEntity<List<Role>> getAllRoles() {
         List<Role> roles = roleService.findAllRoles();
         return ResponseEntity.ok(roles);
     }
@@ -31,5 +31,17 @@ public class RoleController {
     public ResponseEntity<Role> createRole(@RequestBody Role role) {
         Role createdRole = roleService.createRole(role);
         return ResponseEntity.ok(createdRole);
+    }
+
+    @PutMapping
+    public ResponseEntity<Role> updateRole(@RequestBody Role role) {
+        Role updatedRole = roleService.updateRole(role);
+        return ResponseEntity.ok(updatedRole);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteRole(@RequestBody Role role) {
+        roleService.deleteRole(role);
+        return ResponseEntity.noContent().build();
     }
 }

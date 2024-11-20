@@ -27,6 +27,12 @@ public class ProjectService {
         projectToUpdate.setMembers(project.getMembers());
         projectToUpdate.setCompany(project.isCompany());
         projectToUpdate.setCustomerServices(project.getCustomerServices());
+        projectToUpdate.setInteriorPhotos(project.getInteriorPhotos());
+        projectToUpdate.setExamplesOfWorks(project.getExamplesOfWorks());
+        projectToUpdate.setMessages(project.getMessages());
+        projectToUpdate.setProjectAddress(project.getProjectAddress());
+        projectToUpdate.setSubCategory(project.getSubCategory());
+        projectToUpdate.setSchedules(project.getSchedules());
         return projectRepository.save(projectToUpdate);
     }
 
@@ -47,5 +53,9 @@ public class ProjectService {
 
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
+    }
+
+    public List<Project> getProjectsByOwnerId(Long ownerId) {
+        return projectRepository.findAllByOwnerId(ownerId);
     }
 }

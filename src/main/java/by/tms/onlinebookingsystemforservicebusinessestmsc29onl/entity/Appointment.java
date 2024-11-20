@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +22,6 @@ public class Appointment extends AuditMetadata {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String notes;
-    private Integer duration;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
@@ -39,8 +37,12 @@ public class Appointment extends AuditMetadata {
     @JoinColumn(name = "customer_service_id")
     private CustomerService customerService;
 
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule; // Расписание, к которому привязана запись.
+
     public enum AppointmentStatus {
-        CONFIRMED, PENDING, REJECTED;
+        PENDING, REJECTED, CANCELLED, CLIENT_ABSENT, APPROVED;
     }
 
 }

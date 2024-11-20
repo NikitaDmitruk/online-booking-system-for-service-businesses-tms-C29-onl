@@ -34,6 +34,10 @@
         <org.mapstruct.version>1.6.0</org.mapstruct.version>
         <org.projectlombok.version>1.18.30</org.projectlombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <spring.datasource.driver-class-name>org.postgresql.Driver</spring.datasource.driver-class-name>
+        <spring.datasource.url>jdbc:postgresql://localhost:5432/postgres</spring.datasource.url>
+        <spring.datasource.username>postgres</spring.datasource.username>
+        <spring.datasource.password>root</spring.datasource.password>
     </properties>
     <dependencies>
         <dependency>
@@ -77,10 +81,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-rest</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -161,10 +165,10 @@
                 <configuration>
                     <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
                     <outputChangeLogFile>src/main/resources/db/changelog/generated-changelog.yaml</outputChangeLogFile>
-                    <url>jdbc:postgresql://localhost:5432/postgres</url>
-                    <username>postgres</username>
-                    <password>root</password>
-                    <driver>org.postgresql.Driver</driver>
+                    <url>${spring.datasource.url}</url>
+                    <username>${spring.datasource.username}</username>
+                    <password>${spring.datasource.password}</password>
+                    <driver>${spring.datasource.driver-class-name}</driver>
                 </configuration>
             </plugin>
             <plugin>
