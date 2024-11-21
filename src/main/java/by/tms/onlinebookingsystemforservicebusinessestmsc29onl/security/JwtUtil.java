@@ -16,12 +16,9 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secretKey;
-
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
-
     private SecretKey key;
-
     @PostConstruct
     public void init() {
         if (secretKey == null || secretKey.isEmpty()) {
@@ -29,12 +26,10 @@ public class JwtUtil {
         }
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes()); // Инициализируем секретный ключ
     }
-
     // Метод для генерации токена
     public String createToken(String username) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(now)
@@ -42,7 +37,6 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
     }
-
     // Метод для валидации токена
     public boolean validateToken(String token) {
         try {
@@ -52,7 +46,6 @@ public class JwtUtil {
             return false; // Некорректный JWT токен
         }
     }
-
     // Извлечение имени пользователя из токена
     public String getUsername(String token) {
         return getClaims(token).getSubject();

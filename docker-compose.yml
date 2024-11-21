@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    restart: always
+    build:
+      context: .
+    container_name: app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - SPRING_LIQUIBASE_ENABLED=false
+      - SPRING_LIQUIBASE_DEFAULT-SCHEMA=public
+    depends_on:
+      - db
+    ports:
+      - '8080:8080'
+
+  db:
+    image: postgres
+    restart: always
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+
+volumes:
+  pgdata:
+    driver: local

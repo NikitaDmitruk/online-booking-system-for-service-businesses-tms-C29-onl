@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1731314433894-1
+      id: 1732199045947-1
       author: Nikita (generated)
       changes:
         - createTable:
@@ -11,6 +11,9 @@ databaseChangeLog:
               - column:
                   name: client_id
                   type: BIGINT
+              - column:
+                  name: created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
               - column:
                   name: customer_service_id
                   type: BIGINT
@@ -23,18 +26,241 @@ databaseChangeLog:
                   name: id
                   type: BIGINT
               - column:
+                  name: modified_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: schedule_id
+                  type: BIGINT
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: modified_by
+                  type: VARCHAR(255)
+              - column:
+                  name: notes
+                  type: VARCHAR(255)
+              - column:
                   name: status
                   type: VARCHAR(255)
             tableName: tb_appointment
   - changeSet:
-      id: 1731314433894-2
+      id: 1732199045947-2
       author: Nikita (generated)
       changes:
         - createTable:
             columns:
               - column:
+                  name: created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_user_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: avatar
+                  type: VARCHAR(255)
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: modified_by
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: phone
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: username
+                  type: VARCHAR(255)
+            tableName: tb_user
+  - changeSet:
+      id: 1732199045947-3
+      author: Nikita (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: phone
+            constraintName: tb_user_phone_key
+            tableName: tb_user
+  - changeSet:
+      id: 1732199045947-4
+      author: Nikita (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: username
+            constraintName: tb_user_username_key
+            tableName: tb_user
+  - changeSet:
+      id: 1732199045947-5
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: customer_service_id
+                  type: BIGINT
+              - column:
+                  name: examples_of_works
+                  type: VARCHAR(255)
+            tableName: customer_service_examples_of_works
+  - changeSet:
+      id: 1732199045947-6
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: examples_of_works
+                  type: VARCHAR(255)
+            tableName: project_examples_of_works
+  - changeSet:
+      id: 1732199045947-7
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: interior_photos
+                  type: VARCHAR(255)
+            tableName: project_interior_photos
+  - changeSet:
+      id: 1732199045947-8
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: project_id
+                  type: BIGINT
+              - column:
+                  name: messages
+                  type: VARCHAR(255)
+            tableName: project_messages
+  - changeSet:
+      id: 1732199045947-9
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: end_time
+                  type: time(6) WITHOUT TIME ZONE
+              - column:
+                  name: shift_date
+                  type: date
+              - column:
+                  name: start_time
+                  type: time(6) WITHOUT TIME ZONE
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: schedule_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: provider_id
+                  type: BIGINT
+            tableName: schedule
+  - changeSet:
+      id: 1732199045947-10
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: available_slots
+                  type: time(6) WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: schedule_id
+                  type: BIGINT
+            tableName: schedule_available_slots
+  - changeSet:
+      id: 1732199045947-11
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: unavailable_slots
+                  type: time(6) WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: schedule_id
+                  type: BIGINT
+            tableName: schedule_unavailable_slots
+  - changeSet:
+      id: 1732199045947-12
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_category_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: tb_category
+  - changeSet:
+      id: 1732199045947-13
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: brake_after_service
+                  type: INTEGER
+              - column:
+                  name: price
+                  type: numeric(38, 2)
+              - column:
                   name: category_id
                   type: BIGINT
+              - column:
+                  name: created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
               - column:
                   autoIncrement: true
                   constraints:
@@ -44,14 +270,29 @@ databaseChangeLog:
                   name: id
                   type: BIGINT
               - column:
+                  name: modified_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
                   name: provider_id
                   type: BIGINT
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: duration
+                  type: VARCHAR(255)
+              - column:
+                  name: modified_by
+                  type: VARCHAR(255)
               - column:
                   name: name
                   type: VARCHAR(255)
             tableName: tb_customer_service
   - changeSet:
-      id: 1731314433894-3
+      id: 1732199045947-14
       author: Nikita (generated)
       changes:
         - createTable:
@@ -62,6 +303,9 @@ databaseChangeLog:
                   name: is_company
                   type: BOOLEAN
               - column:
+                  name: created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
                   autoIncrement: true
                   constraints:
                     nullable: false
@@ -70,17 +314,44 @@ databaseChangeLog:
                   name: id
                   type: BIGINT
               - column:
+                  name: modified_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
                   name: owner_id
                   type: BIGINT
+              - column:
+                  name: sub_category_id
+                  type: BIGINT
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+              - column:
+                  name: country
+                  type: VARCHAR(255)
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
               - column:
                   name: description
                   type: VARCHAR(255)
               - column:
+                  name: house_number
+                  type: VARCHAR(255)
+              - column:
+                  name: modified_by
+                  type: VARCHAR(255)
+              - column:
                   name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: postal_code
+                  type: VARCHAR(255)
+              - column:
+                  name: street_address
                   type: VARCHAR(255)
             tableName: tb_project
   - changeSet:
-      id: 1731314433894-4
+      id: 1732199045947-15
       author: Nikita (generated)
       changes:
         - createTable:
@@ -97,7 +368,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: tb_project_members
   - changeSet:
-      id: 1731314433894-5
+      id: 1732199045947-16
       author: Nikita (generated)
       changes:
         - createTable:
@@ -115,7 +386,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: tb_role
   - changeSet:
-      id: 1731314433894-6
+      id: 1732199045947-17
       author: Nikita (generated)
       changes:
         - createTable:
@@ -133,34 +404,28 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: tb_service_category
   - changeSet:
-      id: 1731314433894-7
+      id: 1732199045947-18
       author: Nikita (generated)
       changes:
         - createTable:
             columns:
+              - column:
+                  name: category_id
+                  type: BIGINT
               - column:
                   autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: tb_user_pkey
+                    primaryKeyName: tb_sub_category_pkey
                   name: id
                   type: BIGINT
               - column:
-                  name: email
+                  name: name
                   type: VARCHAR(255)
-              - column:
-                  name: username
-                  type: VARCHAR(255)
-              - column:
-                  name: password
-                  type: VARCHAR(255)
-              - column:
-                  name: phone
-                  type: VARCHAR(255)
-            tableName: tb_user
+            tableName: tb_sub_category
   - changeSet:
-      id: 1731314433894-8
+      id: 1732199045947-19
       author: Nikita (generated)
       changes:
         - createTable:
@@ -168,16 +433,35 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_user_roles_pkey
                   name: role_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_user_roles_pkey
                   name: user_id
                   type: BIGINT
             tableName: tb_user_roles
   - changeSet:
-      id: 1731314433894-9
+      id: 1732199045947-20
+      author: Nikita (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: messages
+                  type: VARCHAR(255)
+            tableName: user_messages
+  - changeSet:
+      id: 1732199045947-21
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -192,7 +476,7 @@ databaseChangeLog:
             referencedTableName: tb_user
             validate: true
   - changeSet:
-      id: 1731314433894-10
+      id: 1732199045947-22
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -207,7 +491,52 @@ databaseChangeLog:
             referencedTableName: tb_project
             validate: true
   - changeSet:
-      id: 1731314433894-11
+      id: 1732199045947-23
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: project_examples_of_works
+            constraintName: fk30ki6kcpdv9weuf8iocl6i1ux
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_project
+            validate: true
+  - changeSet:
+      id: 1732199045947-24
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: project_interior_photos
+            constraintName: fk3alcp1n5p8sgid3oeddlmtpxm
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_project
+            validate: true
+  - changeSet:
+      id: 1732199045947-25
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: sub_category_id
+            baseTableName: tb_project
+            constraintName: fk68ku09j878ubwaj6yhn8c3g12
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_sub_category
+            validate: true
+  - changeSet:
+      id: 1732199045947-26
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -222,7 +551,7 @@ databaseChangeLog:
             referencedTableName: tb_service_category
             validate: true
   - changeSet:
-      id: 1731314433894-12
+      id: 1732199045947-27
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -237,7 +566,22 @@ databaseChangeLog:
             referencedTableName: tb_user
             validate: true
   - changeSet:
-      id: 1731314433894-13
+      id: 1732199045947-28
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: tb_sub_category
+            constraintName: fk97vgfu44j3wdv14fh956dxm00
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_category
+            validate: true
+  - changeSet:
+      id: 1732199045947-29
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -252,7 +596,7 @@ databaseChangeLog:
             referencedTableName: tb_customer_service
             validate: true
   - changeSet:
-      id: 1731314433894-14
+      id: 1732199045947-30
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -267,7 +611,37 @@ databaseChangeLog:
             referencedTableName: tb_project
             validate: true
   - changeSet:
-      id: 1731314433894-15
+      id: 1732199045947-31
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_unavailable_slots
+            constraintName: fke60900g052jx98abxtm1aabh9
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: schedule
+            validate: true
+  - changeSet:
+      id: 1732199045947-32
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_available_slots
+            constraintName: fkecd2d8338ab1bcwm57r2avj03
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: schedule
+            validate: true
+  - changeSet:
+      id: 1732199045947-33
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -282,7 +656,22 @@ databaseChangeLog:
             referencedTableName: tb_role
             validate: true
   - changeSet:
-      id: 1731314433894-16
+      id: 1732199045947-34
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_messages
+            constraintName: fkfy19niu4cfvarjj1mqhmu60nc
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_user
+            validate: true
+  - changeSet:
+      id: 1732199045947-35
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -297,7 +686,37 @@ databaseChangeLog:
             referencedTableName: tb_user
             validate: true
   - changeSet:
-      id: 1731314433894-17
+      id: 1732199045947-36
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: tb_appointment
+            constraintName: fkj1banawid1b8ah7ptu0r0hxou
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: schedule
+            validate: true
+  - changeSet:
+      id: 1732199045947-37
+      author: Nikita (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: provider_id
+            baseTableName: schedule
+            constraintName: fknulmr2253hif9aalqtws807j7
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_project
+            validate: true
+  - changeSet:
+      id: 1732199045947-38
       author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
@@ -312,594 +731,33 @@ databaseChangeLog:
             referencedTableName: tb_user
             validate: true
   - changeSet:
-      id: 1731495345727-1
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: duration
-                  type: INT
-              - column:
-                  name: notes
-                  type: VARCHAR(255)
-            tableName: tb_appointment
-  - changeSet:
-      id: 1732017996537-1
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: created_by
-                  type: VARCHAR(255)
-              - column:
-                  name: created_date
-                  type: DATETIME
-              - column:
-                  name: modified_by
-                  type: VARCHAR(255)
-              - column:
-                  name: modified_date
-                  type: DATETIME
-            tableName: tb_appointment
-  - changeSet:
-      id: 1732017996537-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: created_by
-                  type: VARCHAR(255)
-              - column:
-                  name: created_date
-                  type: DATETIME
-              - column:
-                  name: modified_by
-                  type: VARCHAR(255)
-              - column:
-                  name: modified_date
-                  type: DATETIME
-            tableName: tb_customer_service
-  - changeSet:
-      id: 1732017996537-3
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: created_by
-                  type: VARCHAR(255)
-              - column:
-                  name: created_date
-                  type: DATETIME
-              - column:
-                  name: modified_by
-                  type: VARCHAR(255)
-              - column:
-                  name: modified_date
-                  type: DATETIME
-            tableName: tb_project
-  - changeSet:
-      id: 1732017996537-4
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: created_by
-                  type: VARCHAR(255)
-              - column:
-                  name: created_date
-                  type: DATETIME
-              - column:
-                  name: modified_by
-                  type: VARCHAR(255)
-              - column:
-                  name: modified_date
-                  type: DATETIME
-            tableName: tb_user
-  - changeSet:
-      id: 1732017996537-17
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addPrimaryKey:
-            columnNames: role_id, user_id
-            constraintName: pk_tb_user_roles
-            tableName: tb_user_roles
-  - changeSet:
-      id: 1732036281745-5
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addUniqueConstraint:
-            columnNames: email
-            constraintName: uc_tb_user_email
-            tableName: tb_user
-  - changeSet:
-      id: 1732036281745-6
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addUniqueConstraint:
-            columnNames: phone
-            constraintName: uc_tb_user_phone
-            tableName: tb_user
-  - changeSet:
-      id: 1732036281745-7
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addUniqueConstraint:
-            columnNames: username
-            constraintName: uc_tb_user_username
-            tableName: tb_user
-  - changeSet:
-      id: 1732036281745-1
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addNotNullConstraint:
-            columnDataType: VARCHAR(255)
-            columnName: email
-            tableName: tb_user
-            validate: true
-  - changeSet:
-      id: 1732036281745-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addNotNullConstraint:
-            columnDataType: VARCHAR(255)
-            columnName: password
-            tableName: tb_user
-            validate: true
-  - changeSet:
-      id: 1732036281745-3
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addNotNullConstraint:
-            columnDataType: VARCHAR(255)
-            columnName: phone
-            tableName: tb_user
-            validate: true
-  - changeSet:
-      id: 1732036281745-4
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addNotNullConstraint:
-            columnDataType: VARCHAR(255)
-            columnName: username
-            tableName: tb_user
-            validate: true
-  - changeSet:
-      id: 1732115238352-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: customer_service_id
-                  type: BIGINT
-              - column:
-                  name: examples_of_works
-                  type: VARCHAR(255)
-            tableName: customer_service_examples_of_works
-  - changeSet:
-      id: 1732115238352-3
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: project_id
-                  type: BIGINT
-              - column:
-                  name: examples_of_works
-                  type: VARCHAR(255)
-            tableName: project_examples_of_works
-  - changeSet:
-      id: 1732115238352-4
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: project_id
-                  type: BIGINT
-              - column:
-                  name: interior_photos
-                  type: VARCHAR(255)
-            tableName: project_interior_photos
-  - changeSet:
-      id: 1732115238352-5
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: project_id
-                  type: BIGINT
-              - column:
-                  name: messages
-                  type: VARCHAR(255)
-            tableName: project_messages
-  - changeSet:
-      id: 1732115238352-6
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  autoIncrement: true
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_schedule
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: provider_id
-                  type: BIGINT
-              - column:
-                  name: date
-                  type: DATE
-            tableName: schedule
-  - changeSet:
-      id: 1732115238352-7
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: schedule_id
-                  type: BIGINT
-              - column:
-                  name: available_slots
-                  type: TIME
-            tableName: schedule_available_slots
-  - changeSet:
-      id: 1732115238352-8
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: schedule_id
-                  type: BIGINT
-              - column:
-                  name: unavailable_slots
-                  type: TIME
-            tableName: schedule_unavailable_slots
-  - changeSet:
-      id: 1732115238352-9
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  autoIncrement: true
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_tb_category
-                  name: id
-                  type: BIGINT
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-            tableName: tb_category
-  - changeSet:
-      id: 1732115238352-10
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  autoIncrement: true
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_tb_sub_category
-                  name: id
-                  type: BIGINT
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-              - column:
-                  name: category_id
-                  type: BIGINT
-            tableName: tb_sub_category
-  - changeSet:
-      id: 1732115238352-11
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: user_id
-                  type: BIGINT
-              - column:
-                  name: messages
-                  type: VARCHAR(255)
-            tableName: user_messages
-  - changeSet:
-      id: 1732115238352-12
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: avatar
-                  type: VARCHAR(255)
-            tableName: tb_user
-  - changeSet:
-      id: 1732115238352-13
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: brake_after_service
-                  type: INT
-              - column:
-                  name: description
-                  type: VARCHAR(255)
-              - column:
-                  name: duration
-                  type: VARCHAR(255)
-              - column:
-                  name: price
-                  type: DECIMAL
-            tableName: tb_customer_service
-  - changeSet:
-      id: 1732115238352-14
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: city
-                  type: VARCHAR(255)
-              - column:
-                  name: country
-                  type: VARCHAR(255)
-              - column:
-                  name: house_number
-                  type: VARCHAR(255)
-              - column:
-                  name: postal_code
-                  type: VARCHAR(255)
-              - column:
-                  name: street_address
-                  type: VARCHAR(255)
-              - column:
-                  name: sub_category_id
-                  type: BIGINT
-            tableName: tb_project
-  - changeSet:
-      id: 1732115238352-15
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: client_came
-                  type: BOOLEAN
-              - column:
-                  name: schedule_id
-                  type: BIGINT
-            tableName: tb_appointment
-  - changeSet:
-      id: 1732115238352-25
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: provider_id
-            baseTableName: schedule
-            constraintName: FK_SCHEDULE_ON_PROVIDER
-            referencedColumnNames: id
-            referencedTableName: tb_project
-  - changeSet:
-      id: 1732115238352-26
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: schedule_id
-            baseTableName: tb_appointment
-            constraintName: FK_TB_APPOINTMENT_ON_SCHEDULE
-            referencedColumnNames: id
-            referencedTableName: schedule
-  - changeSet:
-      id: 1732115238352-27
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: sub_category_id
-            baseTableName: tb_project
-            constraintName: FK_TB_PROJECT_ON_SUB_CATEGORY
-            referencedColumnNames: id
-            referencedTableName: tb_sub_category
-  - changeSet:
-      id: 1732115238352-28
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: category_id
-            baseTableName: tb_sub_category
-            constraintName: FK_TB_SUB_CATEGORY_ON_CATEGORY
-            referencedColumnNames: id
-            referencedTableName: tb_category
-  - changeSet:
-      id: 1732115238352-29
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: customer_service_id
-            baseTableName: customer_service_examples_of_works
-            constraintName: fk_customerservice_examplesofworks_on_customer_service
-            referencedColumnNames: id
-            referencedTableName: tb_customer_service
-  - changeSet:
-      id: 1732115238352-30
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: project_id
-            baseTableName: project_examples_of_works
-            constraintName: fk_project_examplesofworks_on_project
-            referencedColumnNames: id
-            referencedTableName: tb_project
-  - changeSet:
-      id: 1732172963854-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addColumn:
-            columns:
-              - column:
-                  name: end
-                  type: TIME
-              - column:
-                  name: start
-                  type: TIME
-            tableName: schedule
-  - changeSet:
-      id: 1732172963854-4
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: project_id
-            baseTableName: project_interior_photos
-            constraintName: fk_project_interiorphotos_on_project
-            referencedColumnNames: id
-            referencedTableName: tb_project
-  - changeSet:
-      id: 1732172963854-5
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      id: 1732199045947-39
+      author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: project_id
             baseTableName: project_messages
-            constraintName: fk_project_messages_on_project
+            constraintName: fkqdyvqx5qvg7eykrparw9t062p
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
             referencedColumnNames: id
             referencedTableName: tb_project
+            validate: true
   - changeSet:
-      id: 1732172963854-6
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      id: 1732199045947-40
+      author: Nikita (generated)
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: schedule_id
-            baseTableName: schedule_available_slots
-            constraintName: fk_schedule_availableslots_on_schedule
+            baseColumnNames: customer_service_id
+            baseTableName: customer_service_examples_of_works
+            constraintName: fkqs2vxcu2asrdob2m5ikeq8lgu
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
             referencedColumnNames: id
-            referencedTableName: schedule
-  - changeSet:
-      id: 1732172963854-7
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: schedule_id
-            baseTableName: schedule_unavailable_slots
-            constraintName: fk_schedule_unavailableslots_on_schedule
-            referencedColumnNames: id
-            referencedTableName: schedule
-  - changeSet:
-      id: 1732172963854-8
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: user_id
-            baseTableName: user_messages
-            constraintName: fk_user_messages_on_user
-            referencedColumnNames: id
-            referencedTableName: tb_user
-  - changeSet:
-      id: 1732172963854-10
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - dropColumn:
-            columnName: duration
-            tableName: tb_appointment
-  - changeSet:
-      id: 1732191166457-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - dropNotNullConstraint:
-            columnDataType: bigint
-            columnName: provider_id
-            tableName: schedule
-  - changeSet:
-      id: 1732191348918-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - dropColumn:
-            columnName: date
-            tableName: schedule
-        - dropColumn:
-            columnName: end
-            tableName: schedule
-        - dropColumn:
-            columnName: start
-            tableName: schedule
-  - changeSet:
-      id: 1732192341186-2
-      author: Nikita
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - dropColumn:
-            columnName: client_came
-            tableName: tb_appointment
+            referencedTableName: tb_customer_service
+            validate: true
+
